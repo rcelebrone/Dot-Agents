@@ -1,10 +1,13 @@
-# Project Guidelines & Constraints
+# Project Guidelines & Constraints (Root)
 
-> **Nota:** Este é um arquivo consolidado gerado automaticamente pela skill `compound-engineering` ou preenchido inicialmente pelo `project-bootstrap`. Ele reside na raiz de `.agents/` e serve como a "memória" viva do agente sobre este projeto.
+> **Nota:** Arquivo de memória viva preenchido pela skill `skills/core/compound.md` ou pelo setup inicial.
 
-## Restrições e Aprendizados
-*(A serem preenchidos dinamicamente conforme iterações ocorrem)*
+## Restrições e Aprendizados Técnicos
+*(A serem preenchidos dinamicamente conforme as iterações ocorrem)*
 
-- Quais bibliotecas deram erro e não devem mais ser usadas?
-- Quais antipadrões locais foram descobertos?
-- Quais são os padrões de nomenclatura de componentes deste projeto que diferem do padrão padrão da linguagem?
+- **Padrões de Código**: (Ex: camelCase vs snake_case - definido no bootstrap)
+- **Antipadrões Locais**: (Bibliotecas ou práticas evitadas neste projeto específico)
+- **Aprendizados de Sessão**: (Problemas resolvidos que não devem se repetir)
+
+## Regras de Implementação
+- [Documentação de pacotes e padrões de nomenclatura locais]
