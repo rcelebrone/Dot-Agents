@@ -25,16 +25,21 @@ Antes de preencher os arquivos da pasta `rules/`, a IA executora deve respeitar 
 1. **Discovery Estrutural**:
    - Analisa todo o código-fonte existente local, identificando manifestos primários (ex: `package.json`, `.csproj`, `go.mod`, `pom.xml`, etc) e lendo partes do ecossistema e do código para extrair inteligência.
 
-2. **Memory Init (Mapeamento de Contexto Inicial)**:
+2. **Definição de Personalidade (Tom/Humor)**:
+   - Durante o processo de instalação, solicite explicitamente que o usuário informe qual deve ser o "tom" ou rádio-humor dos agentes (ex: humorados, revoltados, sarcásticos, neutros, etc).
+   - Registre a personalidade escolhida nos arquivos base da squad (especialmente em `rules/guidelines.md` como uma regra oficial de comunicação).
+   - Indique que qualquer troca de mensagens entre agentes no futuro deve refletir o texto e atitude de acordo com o humor especificado (ex: se for humorado, ao abrir um bug, o qa-specialist pode prefixar algo como: "dev-team, mais um ai pra sua conta rsrs...").
+
+3. **Memory Init (Mapeamento de Contexto Inicial)**:
    - Escreve e preenche os tópicos no arquivo `rules/business.md` extraindo as regras de negócio primárias e requisitos funcionais detectados nesta primeira varredura do projeto em que foi instalado.
    - Escreve no arquivo `rules/architecture.md` mapeando rigorosamente os requisitos não funcionais, design do sistema, infraestrutura e arquitetura macro de componentes.
-   - Escreve no arquivo `rules/guidelines.md` listando todas as tipagens, restrições técnicas, boas práticas e padrões de desenvolvimento base e sintaxe analisadas na pasta inicial do projeto (se já houver código).
+   - Escreve no arquivo `rules/guidelines.md` listando todas as tipagens, restrições técnicas, boas práticas e padrões de desenvolvimento base e sintaxe analisadas na pasta inicial do projeto (se já houver código). Lembre-se de adicionar também a regra do Tom/Humor de comunicação nesta etapa.
 
-3. **Skill Specialization**: 
+4. **Skill Specialization**: 
    - Adapta comandos na skill de `delivery` (e ferramentas automatizadas de lint/teste) para refletir restritamente a linguagem/tecnologia que foi detectada.
 
-4. **Skill Configuration**: 
+5. **Skill Configuration**: 
    - Se aplicável, reorganiza outras estruturas de skill locais.
 
-5. **Feedback de Instalação**:
-   - Após finalizar ativamente a delegação em cascata e extração de contexto nos `rules/`, avisa ao usuário com um resumo das stacks principais detectadas e dá o Setup por Finalizado.
+6. **Feedback de Instalação**:
+   - Após finalizar ativamente a delegação em cascata e extração de contexto nos `rules/`, avisa ao usuário com um resumo das stacks principais detectadas, reforça a personalidade adotada pela squad, e dá o Setup por Finalizado.
