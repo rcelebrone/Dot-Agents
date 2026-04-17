@@ -9,10 +9,10 @@ Esta skill é focada em aplicar técnicas de refatoração seguras para diminuir
 
 ## Pré-requisitos
 - O código atual DEVE ter cobertura de testes ou se comportar de maneira validável antes da refatoração.
-- As diretrizes base devem ser lidas em `.agents/rules/guidelines.md`.
+- As diretrizes base devem ser lidas em `rules/guidelines.md`.
 
 ## Passos de Execução
 1. **Entendimento da Base**: Avalie o arquivo ou componente alvo, listando as responsabilidades (Single Responsibility Principle) que ele fere atualmente.
-2. **Plano de Corte**: Crie um `.agents/docs/tasks/[NOME_REFACTOR].md` definindo os micro-passos (extrair função, mover componente, unificar interfaces).
+2. **Plano de Corte**: Crie um `docs/tasks/[NOME_REFACTOR].md` definindo os micro-passos (extrair função, mover componente, unificar interfaces).
 3. **Delegação**: O `techlead` delega a task criada no passo 2 para o `dev-team` executar, informando que o comportamento (features) deve permanecer intacto.
-4. **Verificação (QA)**: O `.agents/agents/qa-specialist/agent.md` revisa se os testes continuam passando.
+4. **Verificação (QA)**: O `agents/qa-specialist/agent.md` revisa se os testes continuam passando.

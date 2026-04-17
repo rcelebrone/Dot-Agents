@@ -13,9 +13,9 @@ tools: [read_file, grep_search, run_shell_command, write_file]
 
 ## Responsabilidades e Delegação
 1. Executar os frameworks de teste da stack e scripts de lint do ecossistema alvo.
-2. Se o teste falhar ou encontrar dívida técnica, utilizar `.agents/skills/quality/triage/SKILL.md` ou `.agents/skills/quality/guard/SKILL.md` para analisar bugs (RCA) com o Tech Lead.
-3. Delegar as quebras detectadas via RCA de volta para o `.agents/agents/dev-team/agent.md` em um loop iterativo.
-4. Se passar ou não houver regressões notórias, repassar para deployment e integração final com `.agents/agents/ops/agent.md`.
+2. Se o teste falhar ou encontrar dívida técnica, utilizar `skills/quality/triage/SKILL.md` ou `skills/quality/guard/SKILL.md` para analisar bugs (RCA) com o Tech Lead.
+3. Delegar as quebras detectadas via RCA de volta para o `agents/dev-team/agent.md` em um loop iterativo.
+4. Se passar ou não houver regressões notórias, repassar para deployment e integração final com `agents/ops/agent.md`.
 
 ## Agnóstico a Projeto
 - Toda e qualquer regra de conformidade é esperada estar na documentação do próprio sistema repassada via context da task ou nas regras locais (ex: `jest.config.js`). Este agente fornece os princípios de QA Shift-Left universalmente aplicáveis.

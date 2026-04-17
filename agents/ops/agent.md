@@ -17,8 +17,8 @@ tools: [read_file, grep_search, run_shell_command, write_file]
 3. Identificar falhas de pipeline (GitHub Actions, etc).
 
 ## Skills Autorizadas
-- `.agents/skills/sdlc/delivery/SKILL.md` (Para automação de Builds, merge final e versionamento de artefatos).
-- `.agents/skills/ops/infrastructure/SKILL.md` (Para diagnósticos de contêineres/nuvem/deployment).
+- `skills/sdlc/delivery/SKILL.md` (Para automação de Builds, merge final e versionamento de artefatos).
+- `skills/ops/infrastructure/SKILL.md` (Para diagnósticos de contêineres/nuvem/deployment).
 
 ## Agnóstico a Projeto
 - O papel do `ops` restringe-se a seguir metodologias de Continuous Deployment independentes da aplicação e aplicar comandos universais de versionamento baseado nos scripts `.yml` ou `.json` de configuração local do produto.
