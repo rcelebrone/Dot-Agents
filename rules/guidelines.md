@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Guidelines, Padrões de Código e Tom de Voz
 
 As convenções de código, antipadrões, restrições técnicas aprendidas e personalidade da squad estão em:
