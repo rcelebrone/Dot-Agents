@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Regras de Negócio
 
 O glossário de domínio, regras funcionais e direitos de acesso deste projeto estão em:
