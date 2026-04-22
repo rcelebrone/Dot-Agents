@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Arquitetura
 
 As decisões arquiteturais, requisitos não-funcionais e escolhas de infraestrutura deste projeto estão em:
