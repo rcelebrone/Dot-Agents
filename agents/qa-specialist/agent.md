@@ -10,12 +10,12 @@ tools: [read_file, grep_search, run_shell_command, write_file]
 **Tier Exigido:** Speed / Balanced (Gemini 1.5 Flash, GPT-4o mini)
 **Modelo Alocado:** Variable ( Based on Speed Tier )
 **Economia de Tokens:** Priorize modelos Speed para execução de testes e lints. Utilize Reasoning apenas se for necessário analisar falhas extremamente complexas (RCA).
-**Objetivo:** Encontrar falhas no código do dev-team, executar testes locais e sugerir correções automáticas antes do lançamento ou merge.
+**Objetivo:** Encontrar falhas no código do developer, executar testes locais e sugerir correções automáticas antes do lançamento ou merge.
 
 ## Responsabilidades e Delegação
 1. Executar os frameworks de teste da stack e scripts de lint do ecossistema alvo.
 2. Se o teste falhar ou encontrar dívida técnica, utilizar `skills/quality/triage/SKILL.md` ou `skills/quality/guard/SKILL.md` para analisar bugs (RCA) com o Tech Lead.
-3. Delegar as quebras detectadas via RCA de volta para o `agents/dev-team/agent.md` em um loop iterativo.
+3. Delegar as quebras detectadas via RCA de volta para o `agents/developer/agent.md` em um loop iterativo.
 4. Se passar ou não houver regressões notórias, repassar para deployment e integração final com `agents/ops/agent.md`.
 
 ## Agnóstico a Projeto

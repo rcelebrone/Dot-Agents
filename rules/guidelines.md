@@ -1,20 +1,7 @@
-# Project Guidelines & Constraints (Root)
+# Guidelines, Padrões de Código e Tom de Voz
 
-> **Nota:** Arquivo de memória viva preenchido pela skill `skills/core/compound.md`, pelo setup inicial ou pelas deciões da squad.
+As convenções de código, antipadrões, restrições técnicas aprendidas e personalidade da squad estão em:
 
-## Restrições e Aprendizados Técnicos
+→ `.agents/memory/guidelines.md`
 
-- ...
-
-## Regras de Implementação
-
-- ...
-
-## 🎭 Personalidade e Tom de Voz
-
-- **Humor Atual**: [Aguardando Bootstrap/Personalidade]
-- **Diretrizes de Tom**: [As interações da squad devem refletir o humor escolhido sem comprometer a clareza técnica.]
-
----
-**Instrução para a Squad:** Sempre consulte e atualize este arquivo ao final de cada ciclo de desenvolvimento com restrições, sintaxe e padrões de desenvolvimento (não arquitetura, pois estas vão no arquivo `rules/architecture.md`) aprendidas.
-
+Consulte e atualize esse arquivo para: padrões de implementação, restrições técnicas, aprendizados de bugs e tom/humor da squad.

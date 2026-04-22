@@ -8,35 +8,105 @@ O framework abandona o conceito de um único assistente genérico e instaura uma
 
 * 🎯 **Product Owner**: Interface com o usuário. Refina regras de negócio e define os Critérios de Aceite (DoD).
 * 👑 **Tech Lead**: Orquestrador Técnico. Transforma os requisitos do PO em tarefas arquiteturais e gerencia o time.
-* 📐 **Architect**: Cuida da integridade do sistema e mantém a memória viva (`rules/architecture.md`).
-* 💻 **Dev Team**: Focado exclusivamente na escrita de código, testes unitários e refatoração.
+* 📐 **Architect**: Cuida da integridade do sistema e mantém a memória viva (`memory/architecture.md`).
+* 💻 **Developer**: Focado exclusivamente na escrita de código, testes unitários e refatoração.
 * 🐛 **QA Specialist**: Focado em testes, auditoria de logs e isolamento de bugs (RCA).
 * ⚙️ **Ops**: Responsável por CI/CD, dependências, build final e versionamento de entrega.
 
-## 🚀 Instalação e Análise de Capacidade (Model Routing)
+## 📁 Estrutura do Projeto
 
-Para instalar este framework no seu projeto e garantir a orquestração perfeita:
+```
+.agents/                        ← Este boilerplate é instalado aqui
+├── agents.md                   ← Orquestrador central + protocolo da squad
+├── agents/                     ← Definições individuais dos agentes
+│   ├── product-owner/agent.md
+│   ├── architect/agent.md
+│   ├── techlead/agent.md
+│   ├── developer/agent.md
+│   ├── qa-specialist/agent.md
+│   └── ops/agent.md
+├── memory/                     ← Memória viva do projeto (retroalimentada pela squad)
+│   ├── business.md             ← Regras de negócio e domínio (governa: PO)
+│   ├── architecture.md         ← Decisões arquiteturais e NFRs (governa: Architect)
+│   └── guidelines.md           ← Padrões de código e tom da squad (governa: todos)
+├── rules/                      ← User Rules do Antigravity (ponteiros para fontes de verdade)
+│   ├── squad.md                → aponta para agents.md
+│   ├── business.md             → aponta para memory/business.md
+│   ├── architecture.md         → aponta para memory/architecture.md
+│   └── guidelines.md           → aponta para memory/guidelines.md
+├── skills/                     ← Workflows reutilizáveis da squad
+│   ├── core/bootstrap/         ← Setup inicial e descoberta de contexto
+│   ├── core/compound/          ← Atualização de memória pós-merge
+│   ├── sdlc/feature-flow/      ← Criação e orquestração de features
+│   ├── sdlc/delivery/          ← Build, versionamento e deploy
+│   ├── sdlc/refactor/          ← Refatoração segura
+│   ├── quality/triage/         ← Isolamento de bugs e RCA
+│   ├── quality/guard/          ← ADRs e conformidade arquitetural
+│   ├── ops/infrastructure/     ← Auditoria de deps e infra
+│   └── ops/squad-visualizer/   ← Dashboard visual da squad
+├── docs/
+│   ├── tasks/                  ← Tasks criadas durante o desenvolvimento
+│   └── templates/              ← Templates de task e bug report
+└── install/
+    └── .cursorrules            ← Template para a raiz do projeto (Cursor)
+```
 
-1. **Injeção**: Faça o clone deste repositório no seu projeto destino e renomeie a pasta para `.agents`.
-2. **Avaliação do LLM (Setup Inicial)**: Na sua IDE ou CLI de Agente, envie o seguinte comando inicial:
-   > "Por favor, atue como o **Tech Lead** (`.agents/agents/techlead.md`). Analise os modelos de linguagem disponíveis no nosso ambiente (ex: Claude 3.5 Sonnet, GPT-4o, Opus). Aloque os modelos com maior capacidade de *Reasoning* para o **Product Owner**, para você e para o **Architect**. Aloque modelos mais rápidos (*Speed/Balanced*) para o **Dev Team**, **QA** e **Ops**. Em seguida, execute a skill `.agents/skills/core/bootstrap.md` para ajustar todo o framework à linguagem de programação deste repositório."
+## 🚀 Instalação
+
+### 1. Injetar o boilerplate
+
+Clone este repositório dentro do seu projeto destino renomeando a pasta para `.agents`:
+
+```bash
+git clone <url-deste-repo> .agents
+```
+
+### 2. Configurar o Cursor (se aplicável)
+
+Copie o arquivo de regras para a raiz do seu projeto:
+
+```bash
+cp .agents/install/.cursorrules .cursorrules
+```
+
+O arquivo `.cursorrules` aponta para as fontes de verdade da squad em `.agents/` — não é necessário editá-lo.
+
+### 3. Executar o Setup Inicial (Bootstrap)
+
+**No Antigravity:** acione o workflow `bootstrap` (`.agents/workflows/bootstrap.md`).
+
+**No Cursor ou outro agente:** envie o seguinte prompt:
+
+> "Leia `.agents/agents.md` para entender o protocolo da squad. Atue como o **Tech Lead** (`.agents/agents/techlead/agent.md`). Analise os modelos disponíveis neste ambiente e aloque os modelos com maior capacidade de raciocínio (Reasoning) para PO, Architect e você; e os mais rápidos (Speed) para Developer, QA e Ops. Em seguida, acione o **Product Owner** para executar `.agents/skills/core/bootstrap/SKILL.md`, varrendo este repositório e populando `.agents/memory/` com o contexto real do projeto."
+
+---
 
 ## 🛠️ O Ciclo de Delegação Autônoma
 
-**⚠️ Regra de Ponto Único (Delegação Padrão):** A Squad DEVE sempre ser acionada para orquestrar e executar as tarefas de ponta a ponta (desde a análise, no PO, até a execução pelos demais). O modelo ativo na janela de contexto de chat APENAS executará o trabalho caso o usuário requisite *explicitamente* para implementar algo por fora da Squad. Do contrário, delegue.
+**⚠️ Regra de Ponto Único (Delegação Padrão):** A Squad DEVE sempre ser acionada para orquestrar e executar as tarefas de ponta a ponta. O modelo ativo na janela de contexto de chat APENAS executará o trabalho caso o usuário requisite *explicitamente* para implementar algo por fora da Squad.
 
-Os agentes possuem restrições rígidas e **não fazem o trabalho uns dos outros**. Se o usuário humano pedir uma nova funcionalidade, o fluxo será:
+1. O **Product Owner** refina a ideia e cria a documentação de requisitos. (Se o usuário enviar a especificação já pronta, o PO apenas a avalia e imediatamente delega).
+2. O **Tech Lead** lê os requisitos, aciona o **Architect** se necessário, e quebra a demanda técnica em `docs/todo/`.
+3. O **Tech Lead** delega a execução sequencial ao **Developer**.
+4. O **Developer** codifica e aciona o **QA Specialist** para rodar a auditoria e os testes.
+5. Passando nos testes, a bola vai para o **Ops**, que gera o build de release e atualiza o versionamento.
+6. O **Tech Lead** invoca `skills/core/compound/SKILL.md` para consolidar aprendizados em `memory/guidelines.md`.
+7. O **Product Owner** faz a validação final da entrega contra os critérios de aceite.
 
-1. O **Product Owner** refina a ideia e cria a documentação de requisitos em `docs/features/`. (Se o usuário enviar a especificação já pronta, o PO apenas a avalia. Não sendo necessários ajustes, imediatamente ele delega para a squad iniciar).
-2. O **Tech Lead** lê os requisitos, aciona o **Architect** se necessário, e quebra a demanda técnica em `docs/tasks/`.
-3. O **Tech Lead** delega a execução sequencial ao **Dev Team**.
-4. O **Dev Team** codifica e aciona o **QA Specialist** para rodar a auditoria e os testes.
-5. Passando nos testes, a bola vai para o **Ops**, que gera o build de release e atualiza o versionamento (`delivery.md`).
-6. O **Tech Lead** invoca o `compound.md` para consolidar aprendizados em `rules/guidelines.md`.
-7. O **Product Owner** faz a validação final da entrega contra os critérios de aceite e notifica o usuário humano do sucesso.
+## ⚡ Workflows Pré-configurados (Antigravity)
+
+Após instalado em `.agents/`, os seguintes workflows estão prontos para uso imediato:
+
+| Workflow | Trigger | Agente inicial |
+|----------|---------|---------------|
+| `bootstrap` | Setup inicial do projeto | Tech Lead → PO |
+| `nova-feature` | Nova feature ou ideia | Product Owner |
+| `corrigir-bug` | Bug ou incidente | Tech Lead |
+| `revisao-arquitetural` | Design ou refatoração | Architect |
+| `deploy` | Release ou dependências | Ops |
 
 ---
----
-*Regra de Agnosticismo: Este framework, seus agentes, regras, templates, orquestrador (`agents.md`) e documento-base (`README.md`) são rigorosamente e obrigatoriamente agnósticos. Nenhuma tecnologia deve figurar intrinsecamente nestas configurações.*
 
-⚠️ **EXCEÇÃO ESTRATÉGICA (Memory State):** Os arquivos `rules/architecture.md`, `rules/guidelines.md` e `rules/business.md` **NÃO SÃO AGNÓSTICOS**. Eles abrigam as decisões absolutas de arquitetura, negócio, stack, infraestrutura e os detalhes aplicáveis apenas ao ecossistema local. Em instalções limpas/novos projetos eles começam essencialmente em branco e DEVEM ser sistematicamente populados e atualizados pelos agentes (de acordo com o papel de cada um) acompanhando a evolução do projeto real.
+*Regra de Agnosticismo: Este framework, seus agentes, skills, orquestrador (`agents.md`) e este `README.md` são rigorosamente agnósticos. Nenhuma tecnologia específica de produto deve figurar nestas configurações.*
+
+⚠️ **EXCEÇÃO ESTRATÉGICA (Memory State):** Os arquivos em `memory/` (`architecture.md`, `guidelines.md` e `business.md`) **NÃO SÃO AGNÓSTICOS**. Eles abrigam as decisões absolutas de arquitetura, negócio e stack do repositório onde a squad foi instalada. Em instalações limpas eles começam essencialmente em branco e DEVEM ser sistematicamente populados e atualizados pelos agentes conforme o projeto evolui.

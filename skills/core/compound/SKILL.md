@@ -7,6 +7,6 @@ description: Especialista em manutenção de contexto e memória técnica. Atual
 
 1. **Context Gathering**: Analisa o `git diff` e aprendizados da sessão.
 2. **State Update**:
-   - `rules/architecture.md`: Adiciona e atualiza decisões de arquitetura.
-   - `rules/guidelines.md`: Adiciona restrições aprendidas (ex: bibliotecas com erro).
-   - `rules/business.md`: Adiciona regras de negócio aprendidas.
+   - `memory/architecture.md`: Adiciona e atualiza decisões de arquitetura.
+   - `memory/guidelines.md`: Adiciona restrições aprendidas (ex: bibliotecas com erro).
+   - `memory/business.md`: Adiciona regras de negócio aprendidas.

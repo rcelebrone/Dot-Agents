@@ -1,2 +1,6 @@
 .agents/**
 .agents
+.env
+.env.local
+.env.example
+.env.prod
