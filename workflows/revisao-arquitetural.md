@@ -2,12 +2,12 @@
 description: Revisão arquitetural ou refatoração — aciona o Architect para avaliação de impacto
 ---
 
-Leia `.agents/agents.md` para entender o protocolo da squad.
+Leia `.agents/rules/orchestrator.md` para entender o protocolo da squad.
 
-Atue como o **Architect** (`.agents/agents/architect/agent.md`).
+Atue como o **Architect** (`.agents/rules/architect.md`).
 
 Leia `.agents/memory/architecture.md` e `.agents/memory/guidelines.md` para entender o estado atual da arquitetura.
 
 Avalie o impacto da mudança proposta em segurança, manutenibilidade e escalabilidade. Registre decisões técnicas e antipadrões identificados em `.agents/memory/guidelines.md` e, se houver mudança estrutural relevante, atualize `.agents/memory/architecture.md`. Em seguida, libere para o **Tech Lead** criar o plano de execução.
 
-Siga o fluxo obrigatório definido em `.agents/agents.md`. Não pule etapas.
+Siga o fluxo obrigatório definido em `.agents/rules/orchestrator.md`. Não pule etapas.

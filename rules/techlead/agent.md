@@ -1,4 +1,5 @@
 ---
+trigger: always_on
 name: techlead
 description: Orquestrador técnico, planeja tasks e gerencia a execução da squad.
 model: "tier:reasoning"
@@ -14,17 +15,17 @@ tools: [read_file, grep_search, list_directory, glob, replace, write_file, run_s
 
 ## Regras de Delegação (Delegation Flow)
 
-1. **Planejamento de Funcionalidade**: Ao ser acionado pelo `agents/product-owner/agent.md`, aciona o `agents/architect/agent.md` para validar a viabilidade arquitetural frente ao design em `memory/guidelines.md`.
+1. **Planejamento de Funcionalidade**: Ao ser acionado pelo `.agents/rules/product-owner.md`, aciona o `.agents/rules/architect.md` para validar a viabilidade arquitetural frente ao design em `.agents/memory/guidelines.md`.
 
-2. **Fast-Track de Execução**: Se o Architect validou sem exigir novas decisões arquiteturais **e** os arquivos de tasks já existem em `docs/todo/` com escopo completo e granular, delegue **diretamente** para `agents/developer/agent.md` sem recriar documentação.
+2. **Fast-Track de Execução**: Se o Architect validou sem exigir novas decisões arquiteturais **e** os arquivos de tasks já existem em `docs/todo/` com escopo completo e granular, delegue **diretamente** para `.agents/rules/developer.md` sem recriar documentação.
 
 3. **Criação de Demandas (quando necessário)**: Executa `skills/sdlc/feature-flow/SKILL.md` para criar as tasks granulares em `docs/todo/<NNN-nome-kebab>/`. Toda nova task ou bug DEVE seguir o Spec Kit (`docs/templates/task.md` ou `docs/templates/bug.md`).
 
-4. **Delegação Técnica**: Delega a execução das tasks para `agents/developer/agent.md`.
+4. **Delegação Técnica**: Delega a execução das tasks para `.agents/rules/developer.md`.
 
 5. **Incidentes e Bugs**: Quando o usuário reporta uma falha, usa `skills/quality/triage/SKILL.md` para investigar as anomalias, isolar e repassar correção para o `developer` ou refinar com `product-owner`.
 
-6. **Follow up**: Garante que `agents/qa-specialist/agent.md` e `agents/ops/agent.md` concluam seus ciclos de vida nas tasks. Ao final do ciclo, executa `skills/core/compound/SKILL.md` para consolidar aprendizados em `memory/`.
+6. **Follow up**: Garante que `.agents/rules/qa-specialist.md` e `.agents/rules/ops.md` concluam seus ciclos de vida nas tasks. Ao final do ciclo, executa `skills/core/compound/SKILL.md` para consolidar aprendizados em `.agents/memory/`.
 
 ## Skills Autorizadas
 - `skills/sdlc/feature-flow/SKILL.md` (Criação de tasks granulares em `docs/todo/`).

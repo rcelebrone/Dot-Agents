@@ -18,10 +18,10 @@ Deve ser acionada sempre que o usuário mandar comandos como:
 
 1. **Verificação de Instalação e Leitura de Registry:**
    - ATENÇÃO: Esta skill só deve operar se a Squad já estiver instalada no repositório atual do usuário.
-   - Consulta o arquivo principal `agents.md` e a pasta `agents/` (incluindo os respectivos arquivos `agent.md` das subpastas como `product-owner`, `techlead`, `architect`, etc.) para confirmar quais papéis e agentes estão ativos e montar a visão correta do ecossistema.
+   - Consulta o arquivo principal `.agents/rules/orchestrator.md` e a pasta `.agents/rules/` (incluindo os respectivos arquivos `.md` dos agentes como `product-owner.md`, `techlead.md`, `architect.md`, etc.) para confirmar quais papéis e agentes estão ativos e montar a visão correta do ecossistema.
 
 2. **Reconstrução Dinâmica da Interface (Dashboard Vivo):**
-   - O arquivo `dashboard.html` NUNCA deve ser considerado estático. Antes de exibí-lo, o agente atuante DEVE OBRIGATORIAMENTE varrer os arquivos atuais da fundação (como `agents.md`, os manifestos individuais `agent.md` e a pasta de `skills/`).
+   - O arquivo `dashboard.html` NUNCA deve ser considerado estático. Antes de exibí-lo, o agente atuante DEVE OBRIGATORIAMENTE varrer os arquivos atuais da fundação (como `.agents/rules/orchestrator.md`, os manifestos individuais em `.agents/rules/` e a pasta de `skills/`).
    - Com os dados reais e estruturados em sua memória, o agente vai Reescrever/Atualizar as seções de agentes e fluxos dentro do `.agents/dashboard.html` preservando seu estilo moderno (CSS), transparecendo os Tiers, Ferramentas acopladas e Nomes que acabaram de ser lidos. Assim a tela será um reflexo vivo, idêntico à squad em uso naquele milissegundo.
 
 3. **Hospedagem e Apresentação (SEMPRE via Localhost):**

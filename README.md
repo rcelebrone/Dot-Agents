@@ -4,11 +4,11 @@ Este repositório é um template de referência para instalar uma squad completa
 
 ## 🏗️ A Squad
 
-O framework abandona o conceito de um único assistente genérico e instaura uma equipe especializada (`agents/`):
+O framework abandona o conceito de um único assistente genérico e instaura uma equipe especializada (`.agents/rules/`):
 
 * 🎯 **Product Owner**: Interface com o usuário. Refina regras de negócio e define os Critérios de Aceite (DoD).
 * 👑 **Tech Lead**: Orquestrador Técnico. Transforma os requisitos do PO em tarefas arquiteturais e gerencia o time.
-* 📐 **Architect**: Cuida da integridade do sistema e mantém a memória viva (`memory/architecture.md`).
+* 📐 **Architect**: Cuida da integridade do sistema e mantém a memória viva (`.agents/memory/architecture.md`).
 * 💻 **Developer**: Focado exclusivamente na escrita de código, testes unitários e refatoração.
 * 🐛 **QA Specialist**: Focado em testes, auditoria de logs e isolamento de bugs (RCA).
 * ⚙️ **Ops**: Responsável por CI/CD, dependências, build final e versionamento de entrega.
@@ -17,23 +17,18 @@ O framework abandona o conceito de um único assistente genérico e instaura uma
 
 ```
 .agents/                        ← Este boilerplate é instalado aqui
-├── agents.md                   ← Orquestrador central + protocolo da squad
-├── agents/                     ← Definições individuais dos agentes
-│   ├── product-owner/agent.md
-│   ├── architect/agent.md
-│   ├── techlead/agent.md
-│   ├── developer/agent.md
-│   ├── qa-specialist/agent.md
-│   └── ops/agent.md
+├── rules/                      ← User Rules do Antigravity (Orquestração e Agentes)
+│   ├── orchestrator.md         ← Orquestrador central + protocolo da squad (always_on)
+│   ├── product-owner.md        ← Definição do PO (always_on)
+│   ├── architect.md            ← Definição do Architect (always_on)
+│   ├── techlead.md             ← Definição do Tech Lead (always_on)
+│   ├── developer.md            ← Definição do Developer (always_on)
+│   ├── qa-specialist.md        ← Definição do QA (always_on)
+│   └── ops.md                  ← Definição do Ops (always_on)
 ├── memory/                     ← Memória viva do projeto (retroalimentada pela squad)
 │   ├── business.md             ← Regras de negócio e domínio (governa: PO)
 │   ├── architecture.md         ← Decisões arquiteturais e NFRs (governa: Architect)
 │   └── guidelines.md           ← Padrões de código e tom da squad (governa: todos)
-├── rules/                      ← User Rules do Antigravity (ponteiros para fontes de verdade)
-│   ├── squad.md                → aponta para agents.md
-│   ├── business.md             → aponta para memory/business.md
-│   ├── architecture.md         → aponta para memory/architecture.md
-│   └── guidelines.md           → aponta para memory/guidelines.md
 ├── skills/                     ← Workflows reutilizáveis da squad
 │   ├── core/bootstrap/         ← Setup inicial e descoberta de contexto
 │   ├── core/compound/          ← Atualização de memória pós-merge
@@ -53,7 +48,19 @@ O framework abandona o conceito de um único assistente genérico e instaura uma
 
 ## 🚀 Instalação
 
-### 1. Injetar o boilerplate
+### Opção 1: Configuração Automática (Recomendado)
+
+Se você estiver usando um agente compatível com Antigravity/User Rules (como este), basta digitar:
+
+> "configure DotAgents"
+
+O agente irá renomear a pasta para `.agents`, configurar as regras e iniciar o bootstrap automaticamente.
+
+---
+
+### Opção 2: Instalação Manual
+
+#### 1. Injetar o boilerplate
 
 Clone este repositório dentro do seu projeto destino renomeando a pasta para `.agents`:
 
@@ -61,7 +68,7 @@ Clone este repositório dentro do seu projeto destino renomeando a pasta para `.
 git clone <url-deste-repo> .agents
 ```
 
-### 2. Configurar o Cursor (se aplicável)
+#### 2. Configurar o Cursor (se aplicável)
 
 Copie o arquivo de regras para a raiz do seu projeto:
 
@@ -69,15 +76,13 @@ Copie o arquivo de regras para a raiz do seu projeto:
 cp .agents/install/.cursorrules .cursorrules
 ```
 
-O arquivo `.cursorrules` aponta para as fontes de verdade da squad em `.agents/` — não é necessário editá-lo.
-
-### 3. Executar o Setup Inicial (Bootstrap)
+#### 3. Executar o Setup Inicial (Bootstrap)
 
 **No Antigravity:** acione o workflow `bootstrap` (`.agents/workflows/bootstrap.md`).
 
 **No Cursor ou outro agente:** envie o seguinte prompt:
 
-> "Leia `.agents/agents.md` para entender o protocolo da squad. Atue como o **Tech Lead** (`.agents/agents/techlead/agent.md`). Analise os modelos disponíveis neste ambiente e aloque os modelos com maior capacidade de raciocínio (Reasoning) para PO, Architect e você; e os mais rápidos (Speed) para Developer, QA e Ops. Em seguida, acione o **Product Owner** para executar `.agents/skills/core/bootstrap/SKILL.md`, varrendo este repositório e populando `.agents/memory/` com o contexto real do projeto."
+> "Leia `.agents/rules/orchestrator.md` para entender o protocolo da squad. Atue como o **Tech Lead** (`.agents/rules/techlead.md`). Analise os modelos disponíveis neste ambiente e aloque os modelos com maior capacidade de raciocínio (Reasoning) para PO, Architect e você; e os mais rápidos (Speed) para Developer, QA e Ops. Em seguida, acione o **Product Owner** para executar `.agents/skills/core/bootstrap/SKILL.md`, varrendo este repositório e populando `.agents/memory/` com o contexto real do projeto."
 
 ---
 

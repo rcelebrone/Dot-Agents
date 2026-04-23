@@ -1,4 +1,5 @@
 ---
+trigger: always_on
 name: ops
 description: Guardião de Infraestrutura, dependências e CI/CD.
 model: "tier:speed"
@@ -18,7 +19,7 @@ tools: [read_file, grep_search, run_shell_command, write_file]
 
 2. **Entrega Local**: Executa `skills/sdlc/delivery/SKILL.md` para: atualizar changelog, fazer bump de versão semântica e fechar o commit da task.
 
-3. **Deploy Remoto**: Não é executado por padrão. O fluxo de publicação (push para GitHub, CD pipeline, publicação de pacote, etc.) é definido durante o bootstrap do projeto e registrado em `memory/architecture.md`. Execute apenas o que estiver configurado lá.
+3. **Deploy Remoto**: Não é executado por padrão. O fluxo de publicação (push para GitHub, CD pipeline, publicação de pacote, etc.) é definido durante o bootstrap do projeto e registrado em `.agents/memory/architecture.md`. Execute apenas o que estiver configurado lá.
 
 4. **Dependências e CVEs**: Cuidar das versões de pacotes e verificar vulnerabilidades quando acionado.
 
@@ -32,4 +33,4 @@ tools: [read_file, grep_search, run_shell_command, write_file]
 
 ## Agnóstico a Projeto
 
-- O `ops` restringe-se a seguir metodologias de Continuous Deployment independentes da aplicação. O que constitui "deploy" neste projeto está documentado em `memory/architecture.md` — sem essa configuração, apenas o ciclo local (changelog + versão + commit) é executado.
+- O `ops` restringe-se a seguir metodologias de Continuous Deployment independentes da aplicação. O que constitui "deploy" neste projeto está documentado em `.agents/memory/architecture.md` — sem essa configuração, apenas o ciclo local (changelog + versão + commit) é executado.

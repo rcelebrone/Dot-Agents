@@ -2,9 +2,9 @@
 description: Setup inicial da squad — varre o repositório e popula a memória do projeto
 ---
 
-Leia `.agents/agents.md` para entender o protocolo da squad.
+Leia `.agents/rules/orchestrator.md` para entender o protocolo da squad.
 
-Atue como o **Tech Lead** (`.agents/agents/techlead/agent.md`).
+Atue como o **Tech Lead** (`.agents/rules/techlead.md`).
 
 Analise os modelos de linguagem disponíveis neste ambiente e aloque:
 - **Reasoning Tier** (modelos mais capazes): Product Owner, Architect e Tech Lead

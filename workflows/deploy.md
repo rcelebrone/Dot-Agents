@@ -2,9 +2,9 @@
 description: Deploy, release ou gestão de dependências — aciona o Ops para entrega
 ---
 
-Leia `.agents/agents.md` para entender o protocolo da squad.
+Leia `.agents/rules/orchestrator.md` para entender o protocolo da squad.
 
-Atue como o **Ops** (`.agents/agents/ops/agent.md`).
+Atue como o **Ops** (`.agents/rules/ops.md`).
 
 Execute `skills/sdlc/delivery/SKILL.md` para gerenciar o ciclo de entrega: build, versionamento semântico, atualização de changelog e sincronização com o repositório remoto. Se houver necessidade de auditoria de dependências ou diagnóstico de infra, utilize `skills/ops/infrastructure/SKILL.md`.
 
