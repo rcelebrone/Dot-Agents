@@ -68,21 +68,25 @@ Clone este repositório dentro do seu projeto destino renomeando a pasta para `.
 git clone <url-deste-repo> .agents
 ```
 
-#### 2. Configurar o Cursor (se aplicável)
+#### 2. A ferramenta
 
-Copie o arquivo de regras para a raiz do seu projeto:
+Utilize uma IDE que trabalhe com orquestração de agentes e inicie a ferramenta no terminal, por exemplo:
 
 ```bash
-cp .agents/install/.cursorrules .cursorrules
+claude
 ```
+ou
+```bash
+gemini
+```
+ou dentro do antigravity, cursor ou outra ferramenta de sua escolha
 
 #### 3. Executar o Setup Inicial (Bootstrap)
 
 **No Antigravity:** acione o workflow `bootstrap` (`.agents/workflows/bootstrap.md`).
 
-**No Cursor ou outro agente:** envie o seguinte prompt:
-
-> "Leia `.agents/rules/orchestrator.md` para entender o protocolo da squad. Atue como o **Tech Lead** (`.agents/rules/techlead.md`). Analise os modelos disponíveis neste ambiente e aloque os modelos com maior capacidade de raciocínio (Reasoning) para PO, Architect e você; e os mais rápidos (Speed) para Developer, QA e Ops. Em seguida, acione o **Product Owner** para executar `.agents/skills/core/bootstrap/SKILL.md`, varrendo este repositório e populando `.agents/memory/` com o contexto real do projeto."
+**No Cursor ou outra ferramenta:** envie o seguinte prompt:
+> "Leia `.agents/rules/orchestrator.md` e execute a instalação de acordo com as instruções"
 
 ---
 
