@@ -52,9 +52,9 @@ O framework abandona o conceito de um único assistente genérico e instaura uma
 
 Se você estiver usando um agente compatível com Antigravity/User Rules (como este), basta digitar:
 
-> "Read DotAgents/agent.md and configure"
+> "Read DotAgents/agent.md and configure to orchestrate in (gemini-cli | claude | antigravity | cursor | other...) tool."
 
-O agente irá renomear a pasta para `.agents`, configurar as regras e iniciar o bootstrap automaticamente.
+O agente irá renomear a pasta para `.agents`, configurar as regras de acordo com a ferramenta que você definiu e iniciar o bootstrap automaticamente.
 
 ---
 
