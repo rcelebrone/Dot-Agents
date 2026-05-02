@@ -41,8 +41,8 @@ Antes de preencher os arquivos da pasta `memory/`, a IA executora deve respeitar
 4. **Skill Specialization**: 
    - Adapta comandos na skill de `delivery` (e ferramentas automatizadas de lint/teste) para refletir restritamente a linguagem/tecnologia que foi detectada.
 
-5. **Skill Configuration**: 
-   - Se aplicável, reorganiza outras estruturas de skill locais.
+5. **Tool Configuration**: 
+   - Cria symlinks para adaptar as estruturas de skill e agents de acordo com a ferramenta do usuário, por exemplo, se a ferramenta que o usuário definiu é o claude, o `rules/orchestrator.md` deve ser copiado para o `CLAUDE.MD`, as skill `skills/<categoria>/SKILL.md` recebem um symlink para `.claude/skills/` e os agents em `rules/<categoria>/agent.md` recebem um symlink para `.claude/agents/`. Dependendo da ferramenta que o usuário escolher, a configuração deve ser de acordo com os padrão da ferramenta para que ela detecte corretamente as regras de orquestração da squad `rules/orchestrator.md`, os agents `rules/<categoria>/agent.md` e as skills `skills/<categoria>/SKILL.md`.
 
 6. **Feedback de Instalação**:
    - Após finalizar ativamente a delegação em cascata e extração de contexto nos `memory/`, avisa ao usuário com um resumo das stacks principais detectadas, reforça a personalidade adotada pela squad, e dá o Setup por Finalizado.
