@@ -169,6 +169,9 @@ Em seguida digite `configure DotAgents` na ferramenta. O instalador detecta a pr
 
 ## 📄 Licença
 
-**Uso não comercial.** Este framework é livre para uso pessoal, acadêmico, educacional e em organizações sem fins lucrativos. **Comercialização — direta ou indireta — é estritamente proibida** sem licença prévia por escrito.
+> **O Framework pode ser a ferramenta que você usa para construir e vender qualquer coisa. O que ele não pode ser é o produto que você vende.**
 
-Leia os termos completos em [`license.md`](license.md) antes de usar, modificar ou redistribuir. Para licenciamento comercial, contate o detentor do copyright indicado no arquivo.
+- ✅ **Permitido (sem autorização adicional):** uso pessoal, acadêmico, educacional, dentro de empresas com fins lucrativos como ferramenta de produtividade, em entregas para clientes, e em qualquer projeto comercial cujo produto final seja diferente do Framework — e-commerce, SaaS de qualquer domínio, apps, plataformas internas, etc.
+- ❌ **Proibido sem licença prévia por escrito:** vender o Framework, oferecê-lo como SaaS/PaaS/plugin pago, repackagear/rebrand como produto próprio, usar como núcleo de uma oferta de "squad de agentes de IA", vender consultoria/treinamento cuja entrega principal seja o próprio Framework, ou treinar modelos de IA que repliquem sua proposta multi-agente.
+
+Leia os termos completos em [`license.md`](license.md). Para licenciar a comercialização do Framework, contate o detentor do copyright indicado no arquivo.
