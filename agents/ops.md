@@ -21,7 +21,7 @@ tools: [read_file, grep_search, run_shell_command, write_file]
 
 3. **Deploy Remoto**: Não é executado por padrão. O fluxo de publicação (push para GitHub, CD pipeline, publicação de pacote, etc.) é definido durante o bootstrap do projeto e registrado em `.agents/memory/architecture.md`. Execute apenas o que estiver configurado lá.
 
-4. **Dependências e CVEs**: Cuidar das versões de pacotes e verificar vulnerabilidades quando acionado.
+4. **Dependências e CVEs**: Cuidar das versões de pacotes e verificar vulnerabilidades. CVEs detectados são repassados ao `.agents/agents/security.md` para classificação de risco e priorização da mitigação.
 
 5. **Pipeline Ops**: Identificar falhas de pipeline (GitHub Actions, etc.) quando acionado.
 

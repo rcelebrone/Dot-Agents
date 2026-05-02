@@ -20,3 +20,4 @@
 - [ ] O comportamento original foi restaurado corretamente.
 - [ ] Nenhum efeito colateral em funcionalidades adjacentes.
 - [ ] Adição de testes de regressão se aplicável.
+- [ ] Se o bug era de segurança: revisão pelo `security-specialist` aprovada e antipadrão registrado em `.agents/memory/guidelines.md`.

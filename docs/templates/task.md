@@ -15,3 +15,6 @@
 
 ## 🧪 Validação e QA
 *Como o `qa-specialist` deve homologar a aprovação desta task.*
+
+## 🔒 Considerações de Segurança
+*A task toca alguma superfície sensível (auth, dados/PII, segredos, integração externa, upload, persistência)? Se sim, listar pontos de atenção e indicar se aciona o `security-specialist` para audit.*

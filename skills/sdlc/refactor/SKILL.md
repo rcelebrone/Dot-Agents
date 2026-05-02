@@ -15,4 +15,4 @@ Esta skill é focada em aplicar técnicas de refatoração seguras para diminuir
 1. **Entendimento da Base**: Avalie o arquivo ou componente alvo, listando as responsabilidades (Single Responsibility Principle) que ele fere atualmente.
 2. **Plano de Corte**: Crie um `docs/todo/[NOME_REFACTOR].md` definindo os micro-passos (extrair função, mover componente, unificar interfaces).
 3. **Delegação**: O `techlead` delega a task criada no passo 2 para o `developer` executar, informando que o comportamento (features) deve permanecer intacto.
-4. **Verificação (QA)**: O `.agents/rules/qa-specialist.md` revisa se os testes continuam passando.
+4. **Verificação (QA)**: O `.agents/agents/qa-specialist.md` revisa se os testes continuam passando.

@@ -1,121 +1,172 @@
-# Multi-Agent Orchestration Boilerplate
+# DotAgents — Multi-Agent Orchestration Boilerplate
 
-Este repositório é um template de referência para instalar uma squad completa e autônoma de Agentes de IA dentro de qualquer projeto de software.
+Template agnóstico para instalar uma squad multi-agente (PO, Architect, Tech Lead, Developer, QA, Security, Ops) em qualquer projeto que use uma ferramenta de orquestração de agentes — **Claude Code, Cursor, Antigravity, Gemini-CLI** ou outras.
+
+A squad é regida por um **orquestrador central** (`workflows/orchestrator.md`), tem **personas** com responsabilidades claras (`agents/`), **skills** reutilizáveis (`skills/`) e uma **memória viva** específica do projeto (`memory/`).
+
+---
+
+## 🚀 Instalação em 1 comando
+
+Dentro do projeto onde você quer instalar a squad, clone este repositório como `DotAgents/`:
+
+```bash
+git clone https://github.com/<owner>/DotAgents.git DotAgents
+```
+
+Em seguida, abra a sua IDE/CLI de orquestração de agentes (Claude Code, Cursor, Antigravity, Gemini-CLI, etc.) e digite:
+
+> **`configure DotAgents`**
+
+O agente ativo lerá `DotAgents/agent.md`, detectará automaticamente sua ferramenta de orquestração (perguntando se houver ambiguidade), renomeará a pasta para `.agents/`, criará os symlinks/cópias necessários para a ferramenta detectada, executará o bootstrap (varredura do projeto + popular memória) e perguntará o tom de comunicação da squad.
+
+> **A squad estará pronta para receber demandas em menos de 1 minuto.**
+
+---
 
 ## 🏗️ A Squad
 
-O framework abandona o conceito de um único assistente genérico e instaura uma equipe especializada (`.agents/rules/`):
-
-* 🎯 **Product Owner**: Interface com o usuário. Refina regras de negócio e define os Critérios de Aceite (DoD).
-* 👑 **Tech Lead**: Orquestrador Técnico. Transforma os requisitos do PO em tarefas arquiteturais e gerencia o time.
-* 📐 **Architect**: Cuida da integridade do sistema e mantém a memória viva (`.agents/memory/architecture.md`).
-* 💻 **Developer**: Focado exclusivamente na escrita de código, testes unitários e refatoração.
-* 🐛 **QA Specialist**: Focado em testes, auditoria de logs e isolamento de bugs (RCA).
-* ⚙️ **Ops**: Responsável por CI/CD, dependências, build final e versionamento de entrega.
-
-## 📁 Estrutura do Projeto
-
-```
-.agents/                        ← Este boilerplate é instalado aqui
-├── rules/                      ← User Rules do Antigravity (Orquestração e Agentes)
-│   ├── orchestrator.md         ← Orquestrador central + protocolo da squad (always_on)
-│   ├── product-owner.md        ← Definição do PO (always_on)
-│   ├── architect.md            ← Definição do Architect (always_on)
-│   ├── techlead.md             ← Definição do Tech Lead (always_on)
-│   ├── developer.md            ← Definição do Developer (always_on)
-│   ├── qa-specialist.md        ← Definição do QA (always_on)
-│   └── ops.md                  ← Definição do Ops (always_on)
-├── memory/                     ← Memória viva do projeto (retroalimentada pela squad)
-│   ├── business.md             ← Regras de negócio e domínio (governa: PO)
-│   ├── architecture.md         ← Decisões arquiteturais e NFRs (governa: Architect)
-│   └── guidelines.md           ← Padrões de código e tom da squad (governa: todos)
-├── skills/                     ← Workflows reutilizáveis da squad
-│   ├── core/bootstrap/         ← Setup inicial e descoberta de contexto
-│   ├── core/compound/          ← Atualização de memória pós-merge
-│   ├── sdlc/feature-flow/      ← Criação e orquestração de features
-│   ├── sdlc/delivery/          ← Build, versionamento e deploy
-│   ├── sdlc/refactor/          ← Refatoração segura
-│   ├── quality/triage/         ← Isolamento de bugs e RCA
-│   ├── quality/guard/          ← ADRs e conformidade arquitetural
-│   ├── ops/infrastructure/     ← Auditoria de deps e infra
-│   └── ops/squad-visualizer/   ← Dashboard visual da squad
-├── docs/
-│   ├── tasks/                  ← Tasks criadas durante o desenvolvimento
-│   └── templates/              ← Templates de task e bug report
-└── install/
-    └── .cursorrules            ← Template para a raiz do projeto (Cursor)
-```
-
-## 🚀 Instalação
-
-### Opção 1: Configuração Automática (Recomendado)
-
-Se você estiver usando um agente compatível com Antigravity/User Rules (como este), basta digitar:
-
-> "Read DotAgents/agent.md and configure to orchestrate in (gemini-cli | claude | antigravity | cursor | other...) tool."
-
-O agente irá renomear a pasta para `.agents`, configurar as regras de acordo com a ferramenta que você definiu e iniciar o bootstrap automaticamente.
+| Persona | Responsabilidade | Tier |
+|---|---|---|
+| 🎯 **Product Owner** | Refina regras de negócio, define DoD, ponto de entrada de features. | Reasoning |
+| 🏛️ **Architect** | Integridade sistêmica, ADRs, decisões em `architecture.md`. | Reasoning |
+| 👑 **Tech Lead** | Triagem técnica, criação de tasks, coordenação ágil. | Reasoning |
+| 💻 **Developer** | Implementação Clean Code + TDD a partir de `docs/todo/`. | Speed |
+| 🧪 **QA Specialist** | Validação funcional, RCA de bugs, auditoria contra DoD. | Speed |
+| 🔒 **Security Specialist** | AppSec/DevSecOps. Threat modeling, OWASP/CWE audit, secret scanning, validação de controles. | Reasoning |
+| 🚀 **Ops** | Ciclo de entrega local (changelog, versão, commit) + deploy se configurado. | Speed |
 
 ---
 
-### Opção 2: Instalação Manual
+## 📁 Estrutura
 
-#### 1. Injetar o boilerplate
-
-Clone este repositório dentro do seu projeto destino renomeando a pasta para `.agents`:
-
-```bash
-git clone <url-deste-repo> .agents
 ```
-
-#### 2. A ferramenta
-
-Utilize uma IDE que trabalhe com orquestração de agentes e inicie a ferramenta no terminal, por exemplo:
-
-```bash
-claude
+DotAgents/                          ← Este boilerplate (após instalação vira .agents/)
+├── agent.md                        ← Instalador autosuficiente (acionado por "configure DotAgents")
+├── README.md                       ← Este arquivo
+│
+├── agents/                         ← Personas da squad (uma por arquivo)
+│   ├── product-owner.md
+│   ├── architect.md
+│   ├── techlead.md
+│   ├── developer.md
+│   ├── qa-specialist.md
+│   ├── security.md
+│   └── ops.md
+│
+├── skills/                         ← Habilidades reutilizáveis pelas personas
+│   ├── core/
+│   │   ├── bootstrap/SKILL.md      ← Varredura inicial e popular memória
+│   │   └── compound/SKILL.md       ← Atualização de memória pós-merge
+│   ├── sdlc/
+│   │   ├── feature-flow/SKILL.md   ← Criar features e tasks
+│   │   ├── delivery/SKILL.md       ← Build, versão, changelog
+│   │   ├── refactor/SKILL.md       ← Refatoração segura
+│   │   └── task-tracker/SKILL.md   ← Gerenciar docs/todo → docs/done
+│   ├── quality/
+│   │   ├── triage/SKILL.md         ← Triagem e RCA de bugs
+│   │   ├── guard/SKILL.md          ← ADRs e conformidade arquitetural
+│   │   └── security-audit/SKILL.md ← OWASP/CWE, secret scanning, threat modeling
+│   └── ops/
+│       ├── infrastructure/SKILL.md ← Auditoria de deps, CVEs, infra
+│       └── squad-visualizer/SKILL.md ← Dashboard visual da squad
+│
+├── workflows/                      ← Orquestrador + atalhos de entrada
+│   ├── orchestrator.md             ← PROTOCOLO CENTRAL (always_on)
+│   ├── bootstrap.md                ← Setup inicial
+│   ├── nova-feature.md             ← Iniciar feature
+│   ├── corrigir-bug.md             ← Iniciar correção
+│   ├── revisao-arquitetural.md     ← Revisão arquitetural
+│   └── deploy.md                   ← Release/deploy
+│
+├── memory/                         ← Memória viva do projeto (NÃO agnóstica)
+│   ├── business.md                 ← Regras de negócio (governa: PO)
+│   ├── architecture.md             ← Decisões arquiteturais e NFRs (governa: Architect + Security)
+│   └── guidelines.md               ← Padrões de código + tom da squad (governa: todos)
+│
+└── docs/
+    ├── templates/
+    │   ├── task.md                 ← Template de task
+    │   └── bug.md                  ← Template de bug
+    ├── todo/                       ← Tasks em andamento (criadas durante o desenvolvimento)
+    └── done/                       ← Tasks concluídas (arquivadas pelo task-tracker)
 ```
-ou
-```bash
-gemini
-```
-ou dentro do antigravity, cursor ou outra ferramenta de sua escolha
-
-#### 3. Executar o Setup Inicial (Bootstrap)
-
-**No Antigravity:** acione o workflow `bootstrap` (`.agents/workflows/bootstrap.md`).
-
-**No Cursor ou outra ferramenta:** envie o seguinte prompt:
-> "Leia `.agents/rules/orchestrator.md` e execute a instalação de acordo com as instruções"
 
 ---
 
-## 🛠️ O Ciclo de Delegação Autônoma
+## 🛠️ Como a Ferramenta é Detectada
 
-**⚠️ Regra de Ponto Único (Delegação Padrão):** A Squad DEVE sempre ser acionada para orquestrar e executar as tarefas de ponta a ponta. O modelo ativo na janela de contexto de chat APENAS executará o trabalho caso o usuário requisite *explicitamente* para implementar algo por fora da Squad.
+O instalador (`agent.md`) procura indicadores no projeto:
 
-1. O **Product Owner** refina a ideia e cria a documentação de requisitos. (Se o usuário enviar a especificação já pronta, o PO apenas a avalia e imediatamente delega).
-2. O **Tech Lead** lê os requisitos, aciona o **Architect** se necessário, e quebra a demanda técnica em `docs/todo/`.
-3. O **Tech Lead** delega a execução sequencial ao **Developer**.
-4. O **Developer** codifica e aciona o **QA Specialist** para rodar a auditoria e os testes.
-5. Passando nos testes, a bola vai para o **Ops**, que gera o build de release e atualiza o versionamento.
-6. O **Tech Lead** invoca `skills/core/compound/SKILL.md` para consolidar aprendizados em `memory/guidelines.md`.
-7. O **Product Owner** faz a validação final da entrega contra os critérios de aceite.
+| Ferramenta | Indicador | Configuração aplicada |
+|---|---|---|
+| **Claude Code** | `.claude/`, `CLAUDE.md` | Symlinks: `CLAUDE.md` ← orchestrator, `.claude/agents/` ← personas, `.claude/skills/` ← skills, `.claude/commands/` ← workflows |
+| **Cursor** | `.cursor/`, `.cursorrules` | Cópias `.mdc` em `.cursor/rules/` (orchestrator + cada persona) com frontmatter `alwaysApply: true` |
+| **Antigravity** | `.agents/rules/` | Estrutura nativa + symlinks de compatibilidade em `.agents/rules/` |
+| **Gemini-CLI** | `GEMINI.md`, `.gemini/` | Symlink `GEMINI.md` ← orchestrator + workflows como `.gemini/commands/` |
+| **Outra** | (perguntado ao usuário) | Configuração manual conforme convenção da ferramenta |
 
-## ⚡ Workflows Pré-configurados (Antigravity)
-
-Após instalado em `.agents/`, os seguintes workflows estão prontos para uso imediato:
-
-| Workflow | Trigger | Agente inicial |
-|----------|---------|---------------|
-| `bootstrap` | Setup inicial do projeto | Tech Lead → PO |
-| `nova-feature` | Nova feature ou ideia | Product Owner |
-| `corrigir-bug` | Bug ou incidente | Tech Lead |
-| `revisao-arquitetural` | Design ou refatoração | Architect |
-| `deploy` | Release ou dependências | Ops |
+Se nenhum indicador for detectado (ou houver mais de um), o instalador **pergunta** a ferramenta.
 
 ---
 
-*Regra de Agnosticismo: Este framework, seus agentes, skills, orquestrador (`agents.md`) e este `README.md` são rigorosamente agnósticos. Nenhuma tecnologia específica de produto deve figurar nestas configurações.*
+## 🔄 Fluxo da Squad
 
-⚠️ **EXCEÇÃO ESTRATÉGICA (Memory State):** Os arquivos em `memory/` (`architecture.md`, `guidelines.md` e `business.md`) **NÃO SÃO AGNÓSTICOS**. Eles abrigam as decisões absolutas de arquitetura, negócio e stack do repositório onde a squad foi instalada. Em instalações limpas eles começam essencialmente em branco e DEVEM ser sistematicamente populados e atualizados pelos agentes conforme o projeto evolui.
+```
+📋 Product Owner → 🏛️ Architect → 👑 Tech Lead → 💻 Developer → 🧪 QA → (🔒 Security se aplicável) → 🚀 Ops
+```
+
+**Regras-chave:**
+- **Fast-track**: cada persona avalia se a etapa pode ser pulada (PO pula refinamento se SDD chega pronto; Architect pula ADR se não há mudança estrutural; Tech Lead pula criação de task se ela já existe).
+- **Security é acionado** quando o código toca superfícies sensíveis (auth, dados/PII, segredos, integrações externas, upload, persistência) ou explicitamente pelo Tech Lead/Architect/usuário.
+- **A squad nunca é pulada** sem solicitação explícita do usuário ("execute por fora da squad").
+
+Veja o protocolo completo em `workflows/orchestrator.md`.
+
+---
+
+## 🧠 Memória Viva (Não Agnóstica)
+
+`memory/business.md`, `memory/architecture.md` e `memory/guidelines.md` começam praticamente vazios em uma instalação nova. Eles **devem** ser populados pelo bootstrap (varredura inicial) e mantidos pela squad ao longo do desenvolvimento.
+
+| Arquivo | O que vive ali | Quem mantém |
+|---|---|---|
+| `business.md` | Regras de negócio, terminologia de domínio, fluxos de permissão | PO |
+| `architecture.md` | Stack, NFRs, decisões arquiteturais, modelo de ameaças, controles de segurança ativos | Architect + Security |
+| `guidelines.md` | Padrões de código, antipadrões, lint, vulnerabilidades remediadas, **tom da squad** | Todos (atualizado por `compound/SKILL.md` ao final dos ciclos) |
+
+---
+
+## 🔒 Segurança Shift-Left
+
+O **Security Specialist** atua em três momentos:
+
+1. **Threat Modeling (Architect aciona)** — antes da implementação, quando a feature toca superfícies sensíveis.
+2. **Code Audit (QA aciona)** — após o Developer entregar, quando o código modifica auth/dados/integrações/upload/PII.
+3. **Security Review (Tech Lead/usuário aciona)** — revisão dedicada sob demanda.
+
+A skill `skills/quality/security-audit/SKILL.md` aplica **OWASP Top 10**, **CWE Top 25**, **secret scanning** e **CVE audit** (em colaboração com Ops).
+
+---
+
+## 🌍 Agnosticismo
+
+- **Personas e Skills** são **agnósticos** a stack/produto — nenhum arquivo em `agents/` ou `skills/` deve conter regra específica de um framework, linguagem ou domínio.
+- **Memória** **não é** agnóstica — é específica do projeto onde a squad foi instalada. Bootstrap a inicializa, a squad a mantém viva.
+
+---
+
+## 📦 Reinstalar / Atualizar
+
+Para atualizar o framework:
+```bash
+cd /seu/projeto
+rm -rf DotAgents && git clone https://github.com/<owner>/DotAgents.git DotAgents
+```
+Em seguida digite `configure DotAgents` na ferramenta. O instalador detecta a presença prévia de `.agents/` e oferece **atualizar** (mantém memória) ou **reinstalar do zero** (apaga memória — perde a inteligência acumulada do projeto).
+
+---
+
+## 📄 Licença
+
+Veja [LICENSE](LICENSE).
