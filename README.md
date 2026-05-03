@@ -16,7 +16,7 @@ git clone https://github.com/<owner>/DotAgents.git DotAgents
 
 Em seguida, abra a sua IDE/CLI de orquestração de agentes (Claude Code, Cursor, Antigravity, Gemini-CLI, etc.) e digite:
 
-> **`Reads DotAgents/agend.md and execute install`** ou **`Reads DotAgents/agend.md and execute update`**
+> **`Reads DotAgents/installer.md and execute install`** ou **`Reads DotAgents/installer.md and execute update`**
 
 O agente ativo lerá `DotAgents/agent.md`, detectará automaticamente sua ferramenta de orquestração (perguntando se houver ambiguidade), renomeará a pasta para `.agents/`, criará os symlinks/cópias necessários para a ferramenta detectada, executará o bootstrap (varredura do projeto + popular memória) e perguntará o tom de comunicação da squad.
 
