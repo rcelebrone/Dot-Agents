@@ -5,11 +5,11 @@ description: Auditoria de segurança aplicada (AppSec). Varre código, dependên
 
 # Skill: Security Audit (Shift-Left AppSec)
 
-Esta skill é acionada pelo `.agents/agents/security.md` (e ocasionalmente pelo `architect` para threat modeling). Aplica boas práticas universais de AppSec adaptadas à stack detectada no bootstrap (`.agents/memory/architecture.md`).
+Esta skill é acionada pelo `{{AGENTS_ROOT}}/agents/security.md` (e ocasionalmente pelo `architect` para threat modeling). Aplica boas práticas universais de AppSec adaptadas à stack detectada no bootstrap (`{{AGENTS_ROOT}}/memorys/architecture.md`).
 
 ## Pré-requisitos
 
-- Antes de auditar, ler `.agents/memory/architecture.md` (stack, fluxos de dados, classificação de dados) e `.agents/memory/guidelines.md` (vulnerabilidades já remediadas — não revisitar a fundo o que já foi corrigido).
+- Antes de auditar, ler `{{AGENTS_ROOT}}/memorys/architecture.md` (stack, fluxos de dados, classificação de dados) e `{{AGENTS_ROOT}}/memorys/guidelines.md` (vulnerabilidades já remediadas — não revisitar a fundo o que já foi corrigido).
 - Identificar o escopo: PR completo, módulo específico ou superfície sensível (auth, upload, integração externa, etc.).
 
 ## Workflow de Execução
@@ -24,7 +24,7 @@ Aplique a abordagem **STRIDE** para enumerar ameaças:
 - **D**enial of Service — limites, rate limit, payloads maliciosos.
 - **E**levation of Privilege — bypass de authz, escalação horizontal/vertical.
 
-Registre o modelo em `.agents/memory/architecture.md` na seção *Modelo de Ameaças* e, quando relevante, abra ADR via `skills/quality/guard/SKILL.md`.
+Registre o modelo em `{{AGENTS_ROOT}}/memorys/architecture.md` na seção *Modelo de Ameaças* e, quando relevante, abra ADR via `{{AGENTS_ROOT}}/skills/quality/guard/SKILL.md`.
 
 ### 2. Auditoria de Código (OWASP Top 10 & CWE Top 25)
 
@@ -57,7 +57,7 @@ Se encontrado: **Critical**. Recomenda-se rotação imediata e remoção via `gi
 
 ### 4. Auditoria de Dependências (CVEs)
 
-Em colaboração com `skills/ops/infrastructure/SKILL.md`:
+Em colaboração com `{{AGENTS_ROOT}}/skills/ops/infrastructure/SKILL.md`:
 - Executar o auditor nativo da stack: `npm audit`, `pip-audit`, `cargo audit`, `mvn dependency-check`, `bundle audit`, etc.
 - Para cada vulnerabilidade, classificar:
   - **Critical**: bloqueador, exige atualização ou mitigação imediata.
@@ -110,12 +110,12 @@ Gere `docs/todo/<NNN>/security-review.md` com a estrutura:
 
 ### 7. Loop com Developer
 
-- Achados **Critical/High** retornam ao `.agents/agents/developer.md` como bloqueadores. O Developer corrige e Security re-audita o ponto específico.
+- Achados **Critical/High** retornam ao `{{AGENTS_ROOT}}/agents/developer.md` como bloqueadores. O Developer corrige e Security re-audita o ponto específico.
 - Achados **Medium/Low** entram como tasks separadas (`P2`/`P3`) em `docs/todo/`, salvo decisão diferente do Tech Lead.
 
 ### 8. Atualização de Memória
 
 Após o ciclo:
-- Vulnerabilidades corrigidas com aprendizado relevante → entrada em `.agents/memory/guidelines.md` (seção *Antipadrões e Aprendizados*).
-- Decisões arquiteturais de segurança → `.agents/memory/architecture.md`.
-- Controles ativos no projeto (ex: bcrypt rounds, política de senha, provider de identidade) → `.agents/memory/architecture.md`.
+- Vulnerabilidades corrigidas com aprendizado relevante → entrada em `{{AGENTS_ROOT}}/memorys/guidelines.md` (seção *Antipadrões e Aprendizados*).
+- Decisões arquiteturais de segurança → `{{AGENTS_ROOT}}/memorys/architecture.md`.
+- Controles ativos no projeto (ex: bcrypt rounds, política de senha, provider de identidade) → `{{AGENTS_ROOT}}/memorys/architecture.md`.

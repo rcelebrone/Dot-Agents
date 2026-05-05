@@ -1,7 +1,7 @@
 # Architecture Memory State (Root)
 
-> **Nota:** Este arquivo mantém obrigatoriamente as decisões arquiteturais globais, banco de dados, infraestrutura e os **Requisitos Não Funcionais**. 
-> *Fronteira:* NÃO COLOQUE regras sistêmicas de código, sintaxe ou restrições de formatação aqui (isso vai no `memory/guidelines.md`) NEM regras de domínio ou fluxo de usuário/produto aqui (isso vai no `memory/business.md`).
+> **Nota:** Este arquivo mantém obrigatoriamente as decisões arquiteturais globais, banco de dados, infraestrutura e os **Requisitos Não Funcionais**.
+> *Fronteira:* NÃO COLOQUE regras sistêmicas de código, sintaxe ou restrições de formatação aqui (isso vai no `{{AGENTS_ROOT}}/memorys/guidelines.md`) NEM regras de domínio ou fluxo de usuário/produto aqui (isso vai no `{{AGENTS_ROOT}}/memorys/business.md`).
 
 ## Requisitos Não Funcionais, Stack e Infra (O que sustenta o app)
 

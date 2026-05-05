@@ -17,20 +17,20 @@ tools: [read_file, grep_search, run_shell_command, write_file]
 
 1. **Confirmação de Conclusão**: Antes de qualquer ação, pergunte ao usuário: *"A task [NNN] foi implementada e os testes passaram. Deseja fechar o ciclo local agora (changelog + versão + commit)? [S/N]"*. Só prossiga com resposta afirmativa.
 
-2. **Entrega Local**: Executa `skills/sdlc/delivery/SKILL.md` para: atualizar changelog, fazer bump de versão semântica e fechar o commit da task.
+2. **Entrega Local**: Executa `{{AGENTS_ROOT}}/skills/sdlc/delivery/SKILL.md` para: atualizar changelog, fazer bump de versão semântica e fechar o commit da task.
 
-3. **Deploy Remoto**: Não é executado por padrão. O fluxo de publicação (push para GitHub, CD pipeline, publicação de pacote, etc.) é definido durante o bootstrap do projeto e registrado em `.agents/memory/architecture.md`. Execute apenas o que estiver configurado lá.
+3. **Deploy Remoto**: Não é executado por padrão. O fluxo de publicação (push para GitHub, CD pipeline, publicação de pacote, etc.) é definido durante o bootstrap do projeto e registrado em `{{AGENTS_ROOT}}/memorys/architecture.md`. Execute apenas o que estiver configurado lá.
 
-4. **Dependências e CVEs**: Cuidar das versões de pacotes e verificar vulnerabilidades. CVEs detectados são repassados ao `.agents/agents/security.md` para classificação de risco e priorização da mitigação.
+4. **Dependências e CVEs**: Cuidar das versões de pacotes e verificar vulnerabilidades. CVEs detectados são repassados ao `{{AGENTS_ROOT}}/agents/security.md` para classificação de risco e priorização da mitigação.
 
 5. **Pipeline Ops**: Identificar falhas de pipeline (GitHub Actions, etc.) quando acionado.
 
 ## Skills Autorizadas
 
-- `skills/sdlc/delivery/SKILL.md` (Automação de builds, versioning e fechamento local do ciclo).
-- `skills/ops/infrastructure/SKILL.md` (Diagnósticos de contêineres, nuvem, deployment e auditoria de dependências).
-- `skills/ops/squad-visualizer/SKILL.md` (Gera e exibe o dashboard visual da squad e governança).
+- `{{AGENTS_ROOT}}/skills/sdlc/delivery/SKILL.md` (Automação de builds, versioning e fechamento local do ciclo).
+- `{{AGENTS_ROOT}}/skills/ops/infrastructure/SKILL.md` (Diagnósticos de contêineres, nuvem, deployment e auditoria de dependências).
+- `{{AGENTS_ROOT}}/skills/ops/squad-visualizer/SKILL.md` (Gera e exibe o dashboard visual da squad e governança).
 
 ## Agnóstico a Projeto
 
-- O `ops` restringe-se a seguir metodologias de Continuous Deployment independentes da aplicação. O que constitui "deploy" neste projeto está documentado em `.agents/memory/architecture.md` — sem essa configuração, apenas o ciclo local (changelog + versão + commit) é executado.
+- O `ops` restringe-se a seguir metodologias de Continuous Deployment independentes da aplicação. O que constitui "deploy" neste projeto está documentado em `{{AGENTS_ROOT}}/memorys/architecture.md` — sem essa configuração, apenas o ciclo local (changelog + versão + commit) é executado.

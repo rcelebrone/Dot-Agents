@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# DotAgents Installer for Cursor AI
+# This script copies agents and commands to .cursor/rules/ as .mdc files.
+
+set -e
+
+# Target directory
+TARGET_DIR=".cursor"
+RULES_DIR="$TARGET_DIR/rules"
+AGENTS_ROOT=".cursor"
+
+# Source directories
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AGENTS_SRC="$SCRIPT_DIR/agents"
+COMMANDS_SRC="$SCRIPT_DIR/commands"
+SKILLS_SRC="$SCRIPT_DIR/skills"
+MEMORYS_SRC="$SCRIPT_DIR/memorys"
+
+echo "-----------------------------------------------"
+echo "🚀 Installing DotAgents to $TARGET_DIR"
+echo "-----------------------------------------------"
+
+mkdir -p "$RULES_DIR"
+mkdir -p "$TARGET_DIR/skills"
+mkdir -p "$TARGET_DIR/memorys"
+
+# Function to convert .md to .mdc with frontmatter and replace placeholder
+install_as_mdc() {
+    local src_file=$1
+    local dest_dir=$2
+    local always_apply=$3
+    local description=$4
+
+    local filename=$(basename "$src_file" .md)
+    local dest_file="$dest_dir/$filename.mdc"
+
+    echo "---
+description: \"$description\"
+globs: \"\"
+alwaysApply: $always_apply
+---
+" > "$dest_file"
+    cat "$src_file" >> "$dest_file"
+    
+    # Replace placeholder
+    sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest_file"
+    
+    echo "  ✅ Installed: $filename.mdc"
+}
+
+# 1. Install Agents
+if [ -d "$AGENTS_SRC" ]; then
+    echo "📦 Installing Agents as Rules..."
+    for f in "$AGENTS_SRC"/*.md; do
+        name=$(basename "$f" .md)
+        install_as_mdc "$f" "$RULES_DIR" "false" "Persona of the $name agent"
+    done
+fi
+
+# 2. Install Commands
+if [ -d "$COMMANDS_SRC" ]; then
+    echo "📦 Installing Commands as Rules..."
+    for f in "$COMMANDS_SRC"/*.md; do
+        name=$(basename "$f" .md)
+        is_orch="false"
+        [ "$name" == "orchestrator" ] && is_orch="true"
+        install_as_mdc "$f" "$RULES_DIR" "$is_orch" "Workflow for $name"
+    done
+fi
+
+# 3. Install Skills & Memorys (as reference files)
+if [ -d "$SKILLS_SRC" ]; then
+    echo "📦 Copying Skills..."
+    cp -r "$SKILLS_SRC"/* "$TARGET_DIR/skills/"
+    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+fi
+
+if [ -d "$MEMORYS_SRC" ]; then
+    echo "📦 Copying Memorys..."
+    cp -r "$MEMORYS_SRC"/* "$TARGET_DIR/memorys/"
+    find "$TARGET_DIR/memorys/" -type f -name "*.md" -exec sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+fi
+
+echo "-----------------------------------------------"
+echo "✨ Installation complete!"
+echo "Your Cursor AI squad is ready in $TARGET_DIR/"
+echo "-----------------------------------------------"

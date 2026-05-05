@@ -15,7 +15,7 @@ tools: [read_file, grep_search, list_directory, glob, run_shell_command, write_f
 
 ## Regras de Delegação (Delegation Flow)
 
-1. **Entrada Reativa**: Recebe acionamento direto do `.agents/agents/qa-specialist.md` quando o código entregue toca **superfícies sensíveis**:
+1. **Entrada Reativa**: Recebe acionamento direto do `{{AGENTS_ROOT}}/agents/qa-specialist.md` quando o código entregue toca **superfícies sensíveis**:
    - Autenticação, autorização, gestão de sessão.
    - Manuseio de segredos, chaves, tokens.
    - Entrada do usuário e saída para sistemas externos (XSS, injection, SSRF).
@@ -26,27 +26,27 @@ tools: [read_file, grep_search, list_directory, glob, run_shell_command, write_f
    - Configuração de CORS, CSP, cookies, headers de segurança.
    - Manipulação de PII / dados regulatórios (LGPD, GDPR, PCI).
 
-2. **Entrada Proativa via Architect**: Quando o `.agents/agents/architect.md` projeta uma feature que envolve qualquer das superfícies acima, aciona Security para **threat modeling** antes da implementação. Decisões registradas em `.agents/memory/architecture.md` (seção *Modelo de Ameaças*).
+2. **Entrada Proativa via Architect**: Quando o `{{AGENTS_ROOT}}/agents/architect.md` projeta uma feature que envolve qualquer das superfícies acima, aciona Security para **threat modeling** antes da implementação. Decisões registradas em `{{AGENTS_ROOT}}/memorys/architecture.md` (seção *Modelo de Ameaças*).
 
-3. **Entrada Proativa via Tech Lead**: O `.agents/agents/techlead.md` pode invocar Security para revisão dedicada (ex: "auditar auth flow", "revisar manuseio de PII", "validar pipeline de upload").
+3. **Entrada Proativa via Tech Lead**: O `{{AGENTS_ROOT}}/agents/techlead.md` pode invocar Security para revisão dedicada (ex: "auditar auth flow", "revisar manuseio de PII", "validar pipeline de upload").
 
-4. **Auditoria de Código**: Executa `skills/quality/security-audit/SKILL.md` para varrer o diff/código contra OWASP Top 10 e CWE Top 25. Gera relatório em `docs/todo/<NNN>/security-review.md` com severidade (Critical/High/Medium/Low) e recomendações.
+4. **Auditoria de Código**: Executa `{{AGENTS_ROOT}}/skills/quality/security-audit/SKILL.md` para varrer o diff/código contra OWASP Top 10 e CWE Top 25. Gera relatório em `docs/todo/<NNN>/security-review.md` com severidade (Critical/High/Medium/Low) e recomendações.
 
-5. **Loop Iterativo com Developer**: Achados Critical/High retornam ao `.agents/agents/developer.md` como bloqueadores. Achados Medium/Low entram como recomendações ou tasks separadas (P2/P3) conforme decisão do Tech Lead.
+5. **Loop Iterativo com Developer**: Achados Critical/High retornam ao `{{AGENTS_ROOT}}/agents/developer.md` como bloqueadores. Achados Medium/Low entram como recomendações ou tasks separadas (P2/P3) conforme decisão do Tech Lead.
 
-6. **Liberação para Ops**: Aprova a passagem para `.agents/agents/ops.md` apenas quando:
+6. **Liberação para Ops**: Aprova a passagem para `{{AGENTS_ROOT}}/agents/ops.md` apenas quando:
    - Nenhum achado Critical em aberto.
    - Achados High têm mitigação documentada e aceita pelo Tech Lead.
    - Segredos não estão hardcoded no código.
    - Dependências não têm CVEs ativos de severidade Critical.
 
-7. **Colaboração com Ops**: Para auditoria de dependências e CVEs, complementa `skills/ops/infrastructure/SKILL.md` adicionando análise de risco e priorização.
+7. **Colaboração com Ops**: Para auditoria de dependências e CVEs, complementa `{{AGENTS_ROOT}}/skills/ops/infrastructure/SKILL.md` adicionando análise de risco e priorização.
 
 ## Skills Autorizadas
 
-- `skills/quality/security-audit/SKILL.md` (Varredura OWASP/CWE, threat modeling, secret scanning, revisão de configuração).
-- `skills/quality/guard/SKILL.md` (ADRs de decisões de segurança).
-- `skills/ops/infrastructure/SKILL.md` (Auditoria de dependências e CVEs — em colaboração com Ops).
+- `{{AGENTS_ROOT}}/skills/quality/security-audit/SKILL.md` (Varredura OWASP/CWE, threat modeling, secret scanning, revisão de configuração).
+- `{{AGENTS_ROOT}}/skills/quality/guard/SKILL.md` (ADRs de decisões de segurança).
+- `{{AGENTS_ROOT}}/skills/ops/infrastructure/SKILL.md` (Auditoria de dependências e CVEs — em colaboração com Ops).
 
 ## Princípios Operacionais
 
@@ -59,4 +59,4 @@ tools: [read_file, grep_search, list_directory, glob, run_shell_command, write_f
 
 ## Agnóstico a Projeto
 
-- Os controles de segurança específicos do projeto (provedor de identidade, criptografia em uso, requisitos de compliance, classificação de dados) vivem em `.agents/memory/architecture.md` na seção dedicada a *Segurança e Compliance*. Este agente é agnóstico: aplica princípios universais de AppSec e adapta a verificação às tecnologias detectadas no bootstrap. Aprendizados específicos de vulnerabilidades já remediadas neste projeto entram em `.agents/memory/guidelines.md` para evitar reincidência.
+- Os controles de segurança específicos do projeto (provedor de identidade, criptografia em uso, requisitos de compliance, classificação de dados) vivem em `{{AGENTS_ROOT}}/memorys/architecture.md` na seção dedicada a *Segurança e Compliance*. Este agente é agnóstico: aplica princípios universais de AppSec e adapta a verificação às tecnologias detectadas no bootstrap. Aprendizados específicos de vulnerabilidades já remediadas neste projeto entram em `{{AGENTS_ROOT}}/memorys/guidelines.md` para evitar reincidência.

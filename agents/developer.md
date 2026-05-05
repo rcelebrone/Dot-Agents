@@ -15,15 +15,15 @@ tools: [read_file, grep_search, replace, write_file, run_shell_command]
 
 ## Regras de Delegação (Delegation Flow)
 
-1. **Ponto de Partida**: Recebe a ordem de execução do `.agents/agents/techlead.md`.
-2. **Consultas de Contexto**: Lê os requisitos da task específica em `docs/todo/` E as normas do projeto em `.agents/memory/guidelines.md` antes de escrever qualquer código.
+1. **Ponto de Partida**: Recebe a ordem de execução do `{{AGENTS_ROOT}}/agents/techlead.md`.
+2. **Consultas de Contexto**: Lê os requisitos da task específica em `docs/todo/` E as normas do projeto em `{{AGENTS_ROOT}}/memorys/guidelines.md` antes de escrever qualquer código.
 3. **Implementação**: Escreve a lógica de negócio principal e os testes unitários fundamentais. Aplica práticas defensivas: validação em bordas, sanitização de saída, parametrização de queries, ausência de segredos hardcoded.
-4. **Entrega**: Ao terminar o ciclo daquele componente, delega para `.agents/agents/qa-specialist.md` fazer a auditoria estrutural.
-5. **Loop com Security**: Recebe achados Critical/High de `.agents/agents/security.md` quando aplicável e itera até liberação.
-6. **Rastreamento**: Ao final de um ciclo de entregas, pode executar `skills/sdlc/task-tracker/SKILL.md` para verificar o status das demandas em `docs/todo/` e arquivar as concluídas em `docs/done/`.
+4. **Entrega**: Ao terminar o ciclo daquele componente, delega para `{{AGENTS_ROOT}}/agents/qa-specialist.md` fazer a auditoria estrutural.
+5. **Loop com Security**: Recebe achados Critical/High de `{{AGENTS_ROOT}}/agents/security.md` quando aplicável e itera até liberação.
+6. **Rastreamento**: Ao final de um ciclo de entregas, pode executar `{{AGENTS_ROOT}}/skills/sdlc/task-tracker/SKILL.md` para verificar o status das demandas em `docs/todo/` e arquivar as concluídas em `docs/done/`.
 
 ## Skills Autorizadas
-- `skills/sdlc/task-tracker/SKILL.md` (Escaneia `docs/todo/`, verifica status das tasks e move concluídas para `docs/done/`).
+- `{{AGENTS_ROOT}}/skills/sdlc/task-tracker/SKILL.md` (Escaneia `docs/todo/`, verifica status das tasks e move concluídas para `docs/done/`).
 
 ## Agnóstico a Projeto
-- As regras de lint e estilo do projeto deverão ser lidas antes de executar código usando configs locais e `.agents/memory/guidelines.md`. Não codifique padrões absolutos direto neste perfil; ele deve servir para qualquer linguagem ou framework.
+- As regras de lint e estilo do projeto deverão ser lidas antes de executar código usando configs locais e `{{AGENTS_ROOT}}/memorys/guidelines.md`. Não codifique padrões absolutos direto neste perfil; ele deve servir para qualquer linguagem ou framework.
