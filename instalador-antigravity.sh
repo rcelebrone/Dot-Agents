@@ -21,33 +21,51 @@ echo "🚀 Installing DotAgents to $TARGET_DIR"
 echo "-----------------------------------------------"
 
 # Ensure target directories exist
-mkdir -p "$TARGET_DIR/rules"
+mkdir -p "$TARGET_DIR/agents"
 mkdir -p "$TARGET_DIR/skills"
 mkdir -p "$TARGET_DIR/commands"
 mkdir -p "$TARGET_DIR/memorys"
+
+# Function for portable sed -i
+inplace_sed() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i "" "$@"
+    else
+        sed -i "$@"
+    fi
+}
 
 # Function to copy and replace placeholder
 copy_and_replace() {
     local src=$1
     local dest=$2
     cp "$src" "$dest"
-    sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest"
+    inplace_sed "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest"
 }
 
-# 1. Install Agents (as Rules)
+# 1. Install Agents (as rules)
 if [ -d "$AGENTS_SRC" ]; then
-    echo "📦 Installing Agents as Rules..."
+    echo "📦 Installing Agents..."
     for f in "$AGENTS_SRC"/*.md; do
-        copy_and_replace "$f" "$TARGET_DIR/rules/$(basename "$f")"
+        copy_and_replace "$f" "$TARGET_DIR/agents/$(basename "$f")"
     done
-    echo "  ✅ Installed Agents to $TARGET_DIR/rules/"
+    echo "  ✅ Installed Agents to $TARGET_DIR/agents/"
 fi
 
 # 2. Install Skills
 if [ -d "$SKILLS_SRC" ]; then
     echo "📦 Installing Skills..."
     cp -r "$SKILLS_SRC"/* "$TARGET_DIR/skills/"
-    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec bash -c '
+        inplace_sed() {
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i "" "$@"
+            else
+                sed -i "$@"
+            fi
+        }
+        inplace_sed "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$1"
+    ' -- {} \;
     echo "  ✅ Installed Skills to $TARGET_DIR/skills/"
 fi
 
@@ -64,7 +82,16 @@ fi
 if [ -d "$MEMORYS_SRC" ]; then
     echo "📦 Installing Memorys..."
     cp -r "$MEMORYS_SRC"/* "$TARGET_DIR/memorys/"
-    find "$TARGET_DIR/memorys/" -type f -name "*.md" -exec sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+    find "$TARGET_DIR/memorys/" -type f -name "*.md" -exec bash -c '
+        inplace_sed() {
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i "" "$@"
+            else
+                sed -i "$@"
+            fi
+        }
+        inplace_sed "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$1"
+    ' -- {} \;
     echo "  ✅ Installed Memorys to $TARGET_DIR/memorys/"
 fi
 
