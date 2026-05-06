@@ -24,7 +24,6 @@ echo "-----------------------------------------------"
 mkdir -p "$TARGET_DIR/agents"
 mkdir -p "$TARGET_DIR/skills"
 mkdir -p "$TARGET_DIR/commands"
-mkdir -p "$TARGET_DIR/memorys"
 
 # Function for portable sed -i
 inplace_sed() {
@@ -43,7 +42,7 @@ copy_and_replace() {
     inplace_sed "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest"
 }
 
-# 1. Install Agents (as rules)
+# 1. Install Agents
 if [ -d "$AGENTS_SRC" ]; then
     echo "📦 Installing Agents..."
     for f in "$AGENTS_SRC"/*.md; do
@@ -78,25 +77,37 @@ if [ -d "$COMMANDS_SRC" ]; then
     echo "  ✅ Installed Commands to $TARGET_DIR/commands/"
 fi
 
-# 4. Install Memorys
+# 4. Install Memorys (Shared at project root)
 if [ -d "$MEMORYS_SRC" ]; then
-    echo "📦 Installing Memorys..."
-    cp -r "$MEMORYS_SRC"/* "$TARGET_DIR/memorys/"
-    find "$TARGET_DIR/memorys/" -type f -name "*.md" -exec bash -c '
-        inplace_sed() {
-            if [[ "$OSTYPE" == "darwin"* ]]; then
-                sed -i "" "$@"
-            else
-                sed -i "$@"
-            fi
-        }
-        inplace_sed "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$1"
-    ' -- {} \;
-    echo "  ✅ Installed Memorys to $TARGET_DIR/memorys/"
+    if [ ! -d "memorys" ]; then
+        echo "📦 Installing Memorys to project root..."
+        mkdir -p "memorys/implementations"
+        cp -r "$MEMORYS_SRC"/* "memorys/"
+        
+        # Apply placeholder replacement even at root
+        find "memorys/" -type f -name "*.md" -exec bash -c '
+            inplace_sed() {
+                if [[ "$OSTYPE" == "darwin"* ]]; then
+                    sed -i "" "$@"
+                else
+                    sed -i "$@"
+                fi
+            }
+            inplace_sed "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$1"
+        ' -- {} \;
+        
+        echo "  ✅ Installed Memorys at project root"
+    else
+        echo "ℹ️ Memorys directory already exists at root. Skipping initial copy."
+    fi
 fi
 
-# 5. Set up AG.md (Main Orchestrator)
-if [ -f "$COMMANDS_SRC/orchestrator.md" ]; then
+# 5. Set up AG.md (Main Manager)
+if [ -f "$COMMANDS_SRC/manager.md" ]; then
+    echo "🔗 Linking manager to AG.md..."
+    copy_and_replace "$COMMANDS_SRC/manager.md" "AG.md"
+    echo "  ✅ AG.md created from manager.md"
+elif [ -f "$COMMANDS_SRC/orchestrator.md" ]; then
     echo "🔗 Linking orchestrator to AG.md..."
     copy_and_replace "$COMMANDS_SRC/orchestrator.md" "AG.md"
     echo "  ✅ AG.md created from orchestrator.md"
