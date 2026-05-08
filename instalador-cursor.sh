@@ -51,7 +51,7 @@ alwaysApply: $always_apply
     fi
     
     # Replace placeholder
-    sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest_file"
+    sed -i.bak "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest_file" && rm "$dest_file.bak"
     
     echo "  ✅ Installed: $filename.mdc"
 }
@@ -80,8 +80,9 @@ fi
 if [ -d "$SKILLS_SRC" ]; then
     echo "📦 Copying Skills..."
     cp -r "$SKILLS_SRC"/* "$TARGET_DIR/skills/"
-    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
-    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i "/^[[:space:]]*trigger:[[:space:]]*always_on/d" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i.bak "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i.bak "/^[[:space:]]*trigger:[[:space:]]*always_on/d" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md.bak" -delete
 fi
 
 if [ -d "$MEMORYS_SRC" ]; then
