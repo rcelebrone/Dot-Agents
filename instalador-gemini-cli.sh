@@ -82,10 +82,10 @@ if [ -d "$MEMORYS_SRC" ]; then
 fi
 
 # 5. Set up GEMINI.md (Main Manager)
-if [ -f "$COMMANDS_SRC/manager.md" ]; then
+if [ -f "$GEMINI_DIR/commands/manager.md" ]; then
     echo "🔗 Linking manager to GEMINI.md..."
-    copy_and_replace "$COMMANDS_SRC/manager.md" "GEMINI.md"
-    echo "  ✅ GEMINI.md created from manager.md"
+    ln -sf "$GEMINI_DIR/commands/manager.md" "GEMINI.md"
+    echo "  ✅ GEMINI.md linked to $GEMINI_DIR/commands/manager.md"
 fi
 
 # 6. Add DotAgents to .gitignore

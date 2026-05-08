@@ -75,10 +75,10 @@ if [ -d "$MEMORYS_SRC" ]; then
 fi
 
 # 5. Set up CLAUDE.md (Main Manager)
-if [ -f "$COMMANDS_SRC/manager.md" ]; then
+if [ -f "$TARGET_DIR/commands/manager.md" ]; then
     echo "🔗 Linking manager to CLAUDE.md..."
-    copy_and_replace "$COMMANDS_SRC/manager.md" "CLAUDE.md"
-    echo "  ✅ CLAUDE.md created from manager.md"
+    ln -sf "$TARGET_DIR/commands/manager.md" "CLAUDE.md"
+    echo "  ✅ CLAUDE.md linked to $TARGET_DIR/commands/manager.md"
 fi
 
 # 6. Add DotAgents to .gitignore

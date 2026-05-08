@@ -95,7 +95,14 @@ if [ -d "$MEMORYS_SRC" ]; then
     fi
 fi
 
-# 4. Add DotAgents to .gitignore
+# 4. Set up CURSOR.md (Main Manager Link for documentation)
+if [ -f "$RULES_DIR/manager.mdc" ]; then
+    echo "🔗 Linking manager to CURSOR.md (for documentation)..."
+    ln -sf "$RULES_DIR/manager.mdc" "CURSOR.md"
+    echo "  ✅ CURSOR.md linked to $RULES_DIR/manager.mdc"
+fi
+
+# 5. Add DotAgents to .gitignore
 if [ -d "DotAgents" ]; then
     if ! grep -q "^DotAgents/" .gitignore 2>/dev/null; then
         echo -e "\n# DotAgents\nDotAgents/" >> .gitignore
