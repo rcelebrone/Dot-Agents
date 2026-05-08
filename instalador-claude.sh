@@ -30,9 +30,9 @@ copy_and_replace() {
     local src=$1
     local dest=$2
     cp "$src" "$dest"
-    sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest"
+    sed -i.bak "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest" && rm "$dest.bak"
     # Remove Antigravity specific trigger (flexible regex)
-    sed -i "/^[[:space:]]*trigger:[[:space:]]*always_on/d" "$dest"
+    sed -i.bak "/^[[:space:]]*trigger:[[:space:]]*always_on/d" "$dest" && rm "$dest.bak"
 }
 
 # 1. Install Agents
@@ -48,8 +48,9 @@ fi
 if [ -d "$SKILLS_SRC" ]; then
     echo "📦 Installing Skills..."
     cp -r "$SKILLS_SRC"/* "$TARGET_DIR/skills/"
-    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
-    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i "/^[[:space:]]*trigger:[[:space:]]*always_on/d" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i.bak "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i.bak "/^[[:space:]]*trigger:[[:space:]]*always_on/d" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md.bak" -delete
     echo "  ✅ Installed Skills to $TARGET_DIR/skills/"
 fi
 

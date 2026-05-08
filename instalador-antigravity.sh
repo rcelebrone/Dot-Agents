@@ -21,7 +21,7 @@ echo "🚀 Installing DotAgents to $TARGET_DIR"
 echo "-----------------------------------------------"
 
 # Ensure target directories exist
-mkdir -p "$TARGET_DIR/rules"
+mkdir -p "$TARGET_DIR/agents"
 mkdir -p "$TARGET_DIR/skills"
 mkdir -p "$TARGET_DIR/commands"
 mkdir -p "$TARGET_DIR/memorys"
@@ -31,23 +31,24 @@ copy_and_replace() {
     local src=$1
     local dest=$2
     cp "$src" "$dest"
-    sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest"
+    sed -i.bak "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" "$dest" && rm "$dest.bak"
 }
 
-# 1. Install Agents (as Rules)
+# 1. Install Agents
 if [ -d "$AGENTS_SRC" ]; then
-    echo "📦 Installing Agents as Rules..."
+    echo "📦 Installing Agents..."
     for f in "$AGENTS_SRC"/*.md; do
-        copy_and_replace "$f" "$TARGET_DIR/rules/$(basename "$f")"
+        copy_and_replace "$f" "$TARGET_DIR/agents/$(basename "$f")"
     done
-    echo "  ✅ Installed Agents to $TARGET_DIR/rules/"
+    echo "  ✅ Installed Agents to $TARGET_DIR/agents/"
 fi
 
 # 2. Install Skills
 if [ -d "$SKILLS_SRC" ]; then
     echo "📦 Installing Skills..."
     cp -r "$SKILLS_SRC"/* "$TARGET_DIR/skills/"
-    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md" -exec sed -i.bak "s|{{AGENTS_ROOT}}|$AGENTS_ROOT|g" {} +
+    find "$TARGET_DIR/skills/" -type f -name "*.md.bak" -delete
     echo "  ✅ Installed Skills to $TARGET_DIR/skills/"
 fi
 
